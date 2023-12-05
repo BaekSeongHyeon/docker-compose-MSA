@@ -1,0 +1,39 @@
+version: "3.3"
+
+services:
+  baekproxy:
+    image: baekproxy
+    ports: 
+      - "81:80"
+    networks: 
+      - internal
+    depends_on:
+      - baekmainapp
+      - baekapp1
+      - baekapp2
+      - db
+
+  baekmainapp:
+    image: baekmainapp
+    networks: 
+      - internal
+
+  baekapp1:
+    image: baekapp1
+    networks: 
+      - internal
+
+  baekapp2:
+    image: baekapp2
+    networks: 
+      - internal
+
+  db:
+    image: baeksql
+    networks: 
+      - internal
+    volumes: 
+      - /home/baek/docker/mysql/mysql_data:/var/lib/mysql
+
+networks:
+  internal:
